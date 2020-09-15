@@ -1,46 +1,56 @@
 export const initialState = {
-  bascket: [],
-  user: null,
+  basket: [],
+  user: null
 };
 
-export const getBascketTotal = (bascket) =>
-  bascket.reduce((amount, item) => item.price + amount, 0);
+// Selector
+export const getBasketTotal = (basket) => 
+  basket?.reduce((amount, item) => item.price + amount, 0);
 
-function reducer(state, action) {
+const reducer = (state, action) => {
+  console.log(action);
   switch (action.type) {
-    case "ADD_TO_BASCKET":
-      console.log(action);
-      // logic for adding item
+    case "ADD_TO_BASKET":
       return {
         ...state,
-        bascket: [...state.bascket, action.item],
+        basket: [...state.basket, action.item],
       };
-      break;
+    
+    case 'EMPTY_BASKET':
+      return {
+        ...state,
+        basket: []
+      }
 
-    case "REMOVE_FROM_BASCKET":
-      // console.log(action.id);
-      let newBascket = [...state.bascket];
-      const index = state.bascket.findIndex(
-        (bascketItem) => bascketItem.id === action.id
+    case "REMOVE_FROM_BASKET":
+      const index = state.basket.findIndex(
+        (basketItem) => basketItem.id === action.id
       );
+      let newBasket = [...state.basket];
+
       if (index >= 0) {
-        newBascket.splice(index, 1);
+        newBasket.splice(index, 1);
+
       } else {
         console.warn(
-          `Can't remove product (id: ${action.id}) is not in the list.`
-        );
+          `Cant remove product (id: ${action.id}) as its not in basket!`
+        )
       }
-      return { ...state, bascket: newBascket };
-      break;
+
+      return {
+        ...state,
+        basket: newBasket
+      }
+    
     case "SET_USER":
       return {
         ...state,
-        user: action.user,
-      };
+        user: action.user
+      }
+
     default:
-      return { ...state };
-      break;
+      return state;
   }
-}
+};
 
 export default reducer;

@@ -1,26 +1,30 @@
+/* eslint-disable jsx-a11y/accessible-emoji */
+/* eslint-disable no-unused-vars */
 import React from "react";
-import StarIcon from '@material-ui/icons/Star';
 import "./Product.css";
 import { useStateValue } from "./StateProvider";
 
-function Product({ id, title, price, rating, image }) {
-  const [{ bascket }, dispatch] = useStateValue();
-  const addToBacket = () => {
+function Product({ id, title, image, price, rating }) {
+  const [{ basket }, dispatch] = useStateValue();
+
+  const addToBasket = () => {
+    // dispatch the item into the data layer
     dispatch({
-      type: "ADD_TO_BASCKET",
+      type: "ADD_TO_BASKET",
       item: {
-        id,
-        title,
-        price,
-        rating,
-        image,
+        id: id,
+        title: title,
+        image: image,
+        price: price,
+        rating: rating,
       },
     });
   };
+
   return (
     <div className="product">
       <div className="product__info">
-        <p className="product__title">{title}</p>
+        <p>{title}</p>
         <p className="product__price">
           <small>$</small>
           <strong>{price}</strong>
@@ -28,14 +32,15 @@ function Product({ id, title, price, rating, image }) {
         <div className="product__rating">
           {Array(rating)
             .fill()
-            .map((_, index) => (
-              <StarIcon key={index} />
+            .map((_, i) => (
+              <p>🌟</p>
             ))}
         </div>
       </div>
 
-      <img className="product__image" src={image} alt="image" />
-      <button onClick={addToBacket}>Add to bascket</button>
+      <img src={image} alt="" />
+
+      <button onClick={addToBasket}>Add to Basket</button>
     </div>
   );
 }
