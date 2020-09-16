@@ -1,6 +1,3 @@
-/* eslint-disable jsx-a11y/accessible-emoji */
-/* eslint-disable jsx-a11y/alt-text */
-/* eslint-disable no-unused-vars */
 import React from 'react';
 import './CheckoutProduct.css'
 import { useStateValue } from "./StateProvider";

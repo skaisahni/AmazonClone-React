@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/alt-text */
 import React, { useState } from 'react';
 import './Login.css'
 import { Link, useHistory } from "react-router-dom";

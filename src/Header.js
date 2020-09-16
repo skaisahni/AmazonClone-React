@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/alt-text */
-/* eslint-disable no-unused-vars */
 import React from "react";
 import "./Header.css";
 import SearchIcon from "@material-ui/icons/Search";
